@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medical.insurance.dao.DictionaryMapper">
+    <select id="findByCategory" resultType="map">
+        SELECT parameter_value AS value, parameter_label AS label
+        FROM ext_data_dictionary
+        WHERE parameter_category=#{category}
+        ORDER BY source_row_no
+    </select>
+
+    <select id="contains" resultType="int">
+        SELECT COUNT(*) FROM ext_data_dictionary
+        WHERE parameter_category=#{category}
+          AND (parameter_value=#{value} OR parameter_label=#{value})
+    </select>
+</mapper>

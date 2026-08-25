@@ -1,0 +1,95 @@
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.security.autoconfigure.UserDetailsServiceAutoConfiguration
+  application:
+    name: medical-insurance-system
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/medical_insurance_reimbursement?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 0
+    locations: classpath:db/migration
+  mail:
+    host: ${SMTP_HOST:localhost}
+    port: ${SMTP_PORT:25}
+    username: ${SMTP_USERNAME:}
+    password: ${SMTP_PASSWORD:}
+    properties:
+      mail.smtp.auth: ${SMTP_AUTH:false}
+      mail.smtp.starttls.enable: ${SMTP_STARTTLS:false}
+      mail.smtp.connectiontimeout: ${SMTP_CONNECTION_TIMEOUT:5000}
+      mail.smtp.timeout: ${SMTP_READ_TIMEOUT:10000}
+      mail.smtp.writetimeout: ${SMTP_WRITE_TIMEOUT:10000}
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+app:
+  auth:
+    allow-plaintext-password: ${ALLOW_PLAINTEXT_PASSWORD:false}
+    expose-reset-code: ${EXPOSE_RESET_CODE:false}
+    reset-secret: ${PASSWORD_RESET_SECRET:local-development-reset-secret-change-me}
+    reset-mail-enabled: ${RESET_MAIL_ENABLED:false}
+    reset-mail-from: ${RESET_MAIL_FROM:no-reply@medical.local}
+  bootstrap-admin:
+    username: ${INITIAL_ADMIN_USERNAME:admin}
+    password: ${INITIAL_ADMIN_PASSWORD:123456}
+    real-name: ${INITIAL_ADMIN_REAL_NAME:系统管理员}
+    email: ${INITIAL_ADMIN_EMAIL:admin@medical.local}
+  bootstrap-role-users:
+    password: ${INITIAL_ROLE_PASSWORD:123456}
+  data-import:
+    # 首次导入时在IDEA运行配置中设置环境变量 DATA_IMPORT_ENABLED=true。
+    # 导入完成后恢复为false，避免每次启动重复扫描Excel。
+    enabled: ${DATA_IMPORT_ENABLED:false}
+    parameter-file: ${PARAMETER_XLS:../../02.数据库设计/参数.xls}
+    catalog-file: ${CATALOG_XLS:../../02.数据库设计/数据.xls}
+  ai:
+    enabled: ${AI_ENABLED:false}
+    api-key: ${DEEPSEEK_API_KEY:}
+    base-url: ${DEEPSEEK_BASE_URL:https://api.deepseek.com}
+    model: ${DEEPSEEK_MODEL:deepseek-v4-flash}
+    thinking-enabled: ${DEEPSEEK_THINKING_ENABLED:true}
+    sync:
+      enabled: ${AI_AUTO_SYNC_ENABLED:${AI_ENABLED:false}}
+      columns: ${AI_SYNC_COLUMNS:https://www.nhsa.gov.cn/col/col104/index.html,https://www.nhsa.gov.cn/col/col105/index.html}
+      max-articles-per-column: ${AI_SYNC_MAX_ARTICLES_PER_COLUMN:12}
+      max-query-articles: ${AI_SYNC_MAX_QUERY_ARTICLES:5}
+      initial-delay-ms: ${AI_SYNC_INITIAL_DELAY_MS:15000}
+      fixed-delay-ms: ${AI_SYNC_FIXED_DELAY_MS:86400000}
+
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  port: ${SERVER_PORT:8080}
+  compression:
+    enabled: true
+    min-response-size: 1024
+    mime-types: text/html,text/css,application/javascript,application/json,application/xml
+  ssl:
+    enabled: ${SSL_ENABLED:false}
+    key-store: ${SSL_KEY_STORE:}
+    key-store-password: ${SSL_KEY_STORE_PASSWORD:}
+    key-store-type: ${SSL_KEY_STORE_TYPE:PKCS12}
+    key-alias: ${SSL_KEY_ALIAS:medical-localhost}
+  servlet:
+    session:
+      timeout: 30m
+      cookie:
+        http-only: true
+        same-site: lax
+        secure: ${SESSION_COOKIE_SECURE:false}
+
+logging:
+  level:
+    root: info
+    com.medical.insurance: info

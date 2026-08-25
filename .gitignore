@@ -1,0 +1,11 @@
+target/
+.idea/
+.run/
+*.iml
+*.log
+.env
+.env.*
+!.env.example
+*.jks
+*.p12
+*.pfx

@@ -1,0 +1,2 @@
+ALTER TABLE ext_bulk_job
+  MODIFY COLUMN job_status VARCHAR(32) NOT NULL;

@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<body>
+<section th:fragment="auth" id="loginView">
+  <div class="login-card"><div class="brand-mark">医</div><h1>医疗保险报销系统</h1><p class="subtitle">医疗保险中心业务管理平台</p>
+    <div class="auth-tabs"><button class="auth-tab active" data-auth-panel="login">登录</button><button class="auth-tab" data-auth-panel="register">注册</button><button class="auth-tab" data-auth-panel="forgot">忘记密码</button></div>
+    <form id="loginForm" data-auth-form="login"><label>用户名或邮箱</label><input name="username" placeholder="请输入用户名或注册邮箱" autocomplete="username" required><label>登录密码</label><input name="password" type="password" autocomplete="current-password" required><button class="primary-btn" type="button" data-submit-form="loginForm">加密登录</button><div id="loginMessage" class="auth-message"></div></form>
+    <form id="registerForm" class="hidden" data-auth-form="register"><label>登录账号</label><input name="username" minlength="4" maxlength="30" autocomplete="username" required><label>真实姓名</label><input name="realName" maxlength="50" autocomplete="name" required><label>找回邮箱</label><input name="email" type="email" maxlength="120" autocomplete="email" required><label>登录密码</label><input name="password" type="password" minlength="8" maxlength="64" autocomplete="new-password" required><label>确认密码</label><input name="confirmPassword" type="password" minlength="8" maxlength="64" autocomplete="new-password" required><div class="password-tip">8至64位，须包含大小写字母、数字和特殊字符</div><button class="primary-btn" type="button" data-submit-form="registerForm">加密注册</button><div id="registerMessage" class="auth-message"></div></form>
+    <div id="forgotPanel" class="hidden" data-auth-form="forgot"><form id="forgotRequestForm"><label>登录账号</label><input name="username" autocomplete="username" required><label>注册邮箱</label><input name="email" type="email" autocomplete="email" required><button id="forgotRequestButton" class="primary-btn" type="button" data-submit-form="forgotRequestForm">获取重置验证码</button></form><form id="resetPasswordForm" class="hidden"><input name="username" type="hidden"><input name="email" type="hidden"><label>六位验证码</label><input name="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required><label>新密码</label><input name="password" type="password" minlength="8" maxlength="64" autocomplete="new-password" required><label>确认新密码</label><input name="confirmPassword" type="password" minlength="8" maxlength="64" autocomplete="new-password" required><div class="password-tip">验证码10分钟有效，连续错误5次后失效；60秒内仅发送一封</div><button class="primary-btn" type="button" data-submit-form="resetPasswordForm">重置密码</button></form><div id="forgotMessage" class="auth-message"></div></div>
+  </div>
+</section>
+</body>
+</html>

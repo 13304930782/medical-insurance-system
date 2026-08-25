@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block th:fragment="assistant">
+  <button id="aiChatLauncher" class="ai-chat-launcher" type="button" title="单击打开，按住可拖动" aria-label="打开系统使用与医保政策智能问答；按住可拖动" aria-controls="aiChatWidget" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a8.5 8.5 0 0 0-7.15 13.1L4 20l4.05-.82A8.5 8.5 0 1 0 12 3Zm0 2a6.5 6.5 0 1 1-3.4 12.04l-.34-.21-1.58.32.33-1.52-.24-.35A6.5 6.5 0 0 1 12 5Zm-3 5.8a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Zm3 0a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Zm3 0a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/></svg></button>
+  <section id="aiChatWidget" class="ai-chat-widget hidden" aria-label="系统使用与医保政策智能问答">
+    <header class="ai-chat-head"><div><strong>系统与医保智能助手</strong><span>系统指南 + 国家医保局官方资料</span></div><button id="aiChatClose" type="button" aria-label="关闭问答窗口">×</button></header>
+    <div id="aiChatMessages" class="ai-chat-messages" aria-live="polite"><div class="ai-message assistant"><span class="ai-avatar">医</span><div class="ai-bubble">您好，我可以回答本系统怎么操作、各角色能做什么、完整报销流程，也可以依据国家医保局官方资料查询医保政策。资料不足时会明确说明，不会猜测。</div></div></div>
+    <div id="aiSyncPanel" class="ai-sync-panel hidden"><span id="aiSyncStatus">正在读取官方知识库状态……</span><button id="aiSyncButton" type="button">立即同步</button></div>
+    <div class="ai-chat-compose"><textarea id="aiChatInput" rows="2" maxlength="1000" placeholder="可询问本系统任何操作、报错或医保政策，Enter 发送"></textarea><button id="aiChatSend" type="button" aria-label="发送问题">➤</button></div>
+    <p class="ai-chat-note">回答附官方来源，仅作政策查询参考，不代替医保经办结论。</p>
+  </section>
+</th:block>
+</body>
+</html>
